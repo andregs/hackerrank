@@ -1,0 +1,16 @@
+{
+  "name": "hackerrank",
+  "version": "1.0.0",
+  "description": "My solutions to HackerRank problems",
+  "author": "André Gomes (http://github.com/andregs)",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andregs/hackerrank.git"
+  },
+  "dependencies": {
+    "bignumber.js": "2.1.2",
+    "lodash": "3.10.1"
+  }
+}
