@@ -13,7 +13,7 @@ function processData(input) {
         }
         process.stdout.write(`${evenIndexed} ${oddIndexed}\n`);
     }
-} 
+}
 
 process.stdin.resume();
 process.stdin.setEncoding("ascii");

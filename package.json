@@ -9,6 +9,28 @@
     "type": "git",
     "url": "https://github.com/andregs/hackerrank.git"
   },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-cond-assign": "off",
+      "eqeqeq": "error",
+      "no-throw-literal": "error",
+      "no-warning-comments": ["warn", {"location": "anywhere"}],
+      "no-with": "error",
+      "strict": "error",
+      "no-shadow-restricted-names": "error",
+      "no-mixed-spaces-and-tabs": "error",
+      "no-trailing-spaces": "warn",
+      "semi": "error",
+      "no-dupe-class-members": "error"
+    }
+  },
   "dependencies": {
     "bignumber.js": "2.1.2",
     "lodash": "3.10.1"
