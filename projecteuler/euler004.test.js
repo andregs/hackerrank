@@ -6,6 +6,6 @@ let output = [
 	800000,
 	999999,
 	888888,
-]
+];
 
 process.stdout.write(output.join("\n"));

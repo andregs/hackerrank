@@ -6,12 +6,12 @@ function processData(input) {
     let size = input.shift();
     let arr = input.shift().split(' ');
     let e = arr[size - 1];
-    
+
     for (var i = size - 2; arr[i] > e; i--) {
         arr[i + 1] = arr[i];
         process.stdout.write(arr.join(' ') + "\n");
     }
-    
+
     arr[i + 1] = e;
     process.stdout.write(arr.join(' ') + "\n");
 }

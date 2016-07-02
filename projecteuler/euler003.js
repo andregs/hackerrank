@@ -5,7 +5,7 @@
 
 function processLine(n) {
     let largestPrimeFactor;
-    
+
     // try to divide n by all the primes we already know
     for (let prime of primes) {
         if (n % prime === 0) {
@@ -25,7 +25,7 @@ function processLine(n) {
                 n /= largestPrimeFactor;
         }
     }
-    
+
     // n is prime because we went beyond its square root
     if (n > 1) largestPrimeFactor = n;
 
@@ -38,9 +38,9 @@ let primes = [ gen.next().value ];
 function* primegen() {
     function* multgen(increment) {
         let multiple = increment;
-        while (true) yield multiple += increment;
+        for (;;) yield multiple += increment;
     }
-    
+
     let skip = {};
     for (let i = 2 ;; i++) {
         if (skip[i] === undefined) {

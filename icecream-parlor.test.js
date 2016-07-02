@@ -8,6 +8,6 @@ let output = [
 	'4',
 	'4',
 	'2 2 4 3',
-]
+];
 
 process.stdout.write(output.join("\n"));

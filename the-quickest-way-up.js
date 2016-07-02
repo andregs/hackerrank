@@ -27,12 +27,12 @@ function processData(input) {
         let hasRes = false;
         while(queue.length > 0) {
             entry = queue.shift();
-            if (entry.pos == N) {
+            if (entry.pos === N) {
                 process.stdout.write(entry.step + "\n");
                 hasRes = true;
                 break;
             }
-            if (visited[entry.pos] == true) {
+            if (visited[entry.pos] === true) {
                 continue;
             }
             visited[entry.pos] = true;
@@ -49,7 +49,7 @@ function processData(input) {
             process.stdout.write(-1 + "\n");
         }
     }
-} 
+}
 
 process.stdin.resume();
 process.stdin.setEncoding("ascii");

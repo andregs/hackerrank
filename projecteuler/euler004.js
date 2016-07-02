@@ -5,7 +5,7 @@
 
 const _ = require('lodash');
 
-let palindromes = []
+let palindromes = [];
 for (let i = 100; i <= 999; i++) {
     for (let j = i; j <= 999; j++) {
         let product = i * j + '';

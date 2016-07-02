@@ -29,6 +29,6 @@ let output = [
 	'53 7',
 	'43 33',
 	'77 21',
-]
+];
 
 process.stdout.write(output.join("\n"));

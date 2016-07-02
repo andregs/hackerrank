@@ -20,7 +20,7 @@ let gen = evenfibonacci();
 function* evenfibonacci() {
     let fn1 = new BigNumber(2);
     let fn2 = new BigNumber(0);
-    while (true) {
+    for (;;) {
         let current = fn2;
         fn2 = fn1;
         fn1 = fn1.mul(4).add(current);
