@@ -10,13 +10,13 @@
     "url": "https://github.com/andregs/hackerrank.git"
   },
   "eslintConfig": {
-    "extends": "eslint:recommended",
     "parserOptions": {
       "ecmaVersion": 6
     },
     "env": {
       "node": true
     },
+    "extends": "eslint:recommended",
     "rules": {
       "no-cond-assign": "off",
       "eqeqeq": "error",
@@ -25,10 +25,11 @@
       "no-with": "error",
       "strict": "error",
       "no-shadow-restricted-names": "error",
-      "no-mixed-spaces-and-tabs": "error",
+      "no-mixed-spaces-and-tabs": "warn",
       "no-trailing-spaces": "warn",
       "semi": "error",
-      "no-dupe-class-members": "error"
+      "prefer-rest-params": "error",
+      "prefer-spread": "warn"
     }
   },
   "dependencies": {
