@@ -8,5 +8,5 @@ See also <a href="https://www.hackerrank.com/andregs">my profile</a>.
 To test a solution:
 
 ```
-node filename.test.js | node filename.js
+node filename.js test
 ```
