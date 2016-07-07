@@ -5,9 +5,10 @@
 
 const BigNumber = require('bignumber.js');
 
-function processData(input) {
-    for (let i = 2; i < input.length; i += 2) {
-        let arr = input[i].split(' ');
+function main() {
+    _input = _input.split("\n");
+    for (let i = 2; i < _input.length; i += 2) {
+        let arr = _input[i].split(' ');
 
         // continguous
         let ans = new BigNumber(arr[0]);
@@ -36,6 +37,17 @@ process.stdin.on("data", function (input) {
     _input += input;
 });
 
-process.stdin.on("end", function () {
-   processData(_input.split("\n"));
-});
+process.stdin.on("end", main);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    _input = `
+	2
+	4
+	1 2 3 4
+	6
+	2 -1 2 3 4 -5
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${_input}\n\nOutput:\n`);
+    main();
+}

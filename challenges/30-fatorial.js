@@ -8,11 +8,18 @@ function factorial(n) {
 
 process.stdin.resume();
 process.stdin.setEncoding("ascii");
-let _input = "";
-process.stdin.on("data", function (input) {
-    _input += input;
+let input = "";
+process.stdin.on("data", function (data) {
+    input += data;
 });
 
 process.stdin.on("end", function () {
-    process.stdout.write(factorial(+ _input) + "\n");
+    process.stdout.write('' + factorial(+ input));
 });
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    input = '5';
+    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    process.stdout.write('' + factorial(+ input));
+}

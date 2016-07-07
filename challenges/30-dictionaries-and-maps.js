@@ -3,7 +3,8 @@
 // https://www.hackerrank.com/challenges/30-dictionaries-and-maps
 // tip: don't use array.shift() because it's too slow (it'll timeout)
 
-function processData(input) {
+function main() {
+    input = input.split('\n');
     let book = new Map();
     let n = + input[0];
     for (let entry of input.slice(1, n + 1)) {
@@ -18,11 +19,24 @@ function processData(input) {
 
 process.stdin.resume();
 process.stdin.setEncoding("ascii");
-let _input = "";
-process.stdin.on("data", function (input) {
-    _input += input;
+let input = "";
+process.stdin.on("data", function (data) {
+    input += data;
 });
 
-process.stdin.on("end", function () {
-   processData(_input.split("\n"));
-});
+process.stdin.on("end", main);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    input = `
+    3
+    sam 99912222
+    tom 11122222
+    harry 12299933
+    sam
+    edward
+    harry
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    main();
+}

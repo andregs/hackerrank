@@ -2,7 +2,7 @@
 
 // https://www.hackerrank.com/challenges/30-2d-arrays
 
-function processData(input) {
+function processData() {
     input = input.split('\n').map(line => line.split(' ').map(Number));
     let answer = -Infinity;
     for (let i = 0; i < input.length - 2; i++) {
@@ -24,6 +24,18 @@ process.stdin.on('data', function (data) {
     input += data;
 });
 
-process.stdin.on('end', function () {
-    processData(input);
-});
+process.stdin.on('end', processData);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    input = `
+    1 1 1 0 0 0
+    0 1 0 0 0 0
+    1 1 1 0 0 0
+    0 0 2 4 4 0
+    0 0 0 2 0 0
+    0 0 1 2 4 0
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    processData();
+}

@@ -4,8 +4,8 @@
 // tip: my solution isn't optimal since I'm generating all posible triples that
 // satisfy the problem's constraints
 
-function processData(input) {
-    input.split("\n").slice(1).map(Number).forEach(n => {
+function main() {
+    _input.split("\n").slice(1).map(Number).forEach(n => {
         let answer = -1;
         if (pythagoreanTriples.has(n)) {
             answer = pythagoreanTriples.get(n).reduce((x, y) => x * y);
@@ -60,6 +60,17 @@ process.stdin.on("data", function (input) {
     _input += input;
 });
 
-process.stdin.on("end", function () {
-   processData(_input);
-});
+process.stdin.on("end", main);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    _input = `
+    4
+    12
+    2886
+    1
+    3000
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${_input}\n\nOutput:\n`);
+    main();
+}

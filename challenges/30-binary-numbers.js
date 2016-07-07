@@ -5,7 +5,8 @@
 // tip2: one-line solution, but cheating (it uses native function to convert to binary)
 // Math.max(...Number(n).toString(2).split(/0+/).map(e => e.length))
 
-function main(n) {
+function main() {
+    let n = + input;
     let current = 0, answer = 0;
     while (n > 0) {
         let binaryDigit = n % 2;
@@ -20,19 +21,19 @@ function main(n) {
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
-var input_stdin = "";
-var input_stdin_array = "";
-var input_currentline = 0;
+let input = "";
 
 process.stdin.on('data', function (data) {
-    input_stdin += data;
+    input += data;
 });
 
-process.stdin.on('end', function () {
-    input_stdin_array = input_stdin.split("\n");
-    main(+ readLine());
-});
+process.stdin.on('end', main);
 
-function readLine() {
-    return input_stdin_array[input_currentline++];
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    input = `
+    1000000
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    main();
 }

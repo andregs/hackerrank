@@ -2,9 +2,10 @@
 
 // https://www.hackerrank.com/challenges/insertionsort1
 
-function processData(input) {
-    let size = input.shift();
-    let arr = input.shift().split(' ');
+function main() {
+    _input = _input.split("\n");
+    let size = _input.shift();
+    let arr = _input.shift().split(' ');
     let e = arr[size - 1];
 
     for (var i = size - 2; arr[i] > e; i--) {
@@ -23,6 +24,14 @@ process.stdin.on("data", function (input) {
     _input += input;
 });
 
-process.stdin.on("end", function () {
-   processData(_input.split("\n"));
-});
+process.stdin.on("end", main);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    _input = `
+	5
+    2 4 6 8 3
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${_input}\n\nOutput:\n`);
+    main();
+}

@@ -2,10 +2,11 @@
 
 // https://www.hackerrank.com/challenges/30-review-loop
 
-function processData(input) {
-    for (let t = input.shift(); t > 0; t--) {
+function main() {
+    _input = _input.split('\n');
+    for (let t = _input.shift(); t > 0; t--) {
         let even = false, evenIndexed = '', oddIndexed = '';
-        for (let char of input.shift()) {
+        for (let char of _input.shift()) {
             if (even = !even)
                 evenIndexed += char;
             else
@@ -22,6 +23,15 @@ process.stdin.on("data", function (input) {
     _input += input;
 });
 
-process.stdin.on("end", function () {
-   processData(_input.split("\n"));
-});
+process.stdin.on("end", main);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    _input = `
+    2
+    Hacker
+    Rank
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${_input}\n\nOutput:\n`);
+    main();
+}

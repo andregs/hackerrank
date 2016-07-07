@@ -24,3 +24,13 @@ process.stdin.on('data', function (data) {
 });
 
 process.stdin.on('end', main);
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    input = `
+    10 3
+    29 97 52 86 27 89 77 19 99 96
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    main();
+}

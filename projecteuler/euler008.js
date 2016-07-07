@@ -27,6 +27,20 @@ process.stdin.on("data", function (input) {
     _input += input;
 });
 
-process.stdin.on("end", function () {
+process.stdin.on("end", main);
+function main() {
    processData(_input.split("\n").slice(1));
-});
+}
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    _input = `
+    2
+    10 5
+    3675356291
+    10 5
+    2709360626
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${_input}\n\nOutput:\n`);
+    main();
+}

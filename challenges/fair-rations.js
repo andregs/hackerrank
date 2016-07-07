@@ -25,6 +25,17 @@ process.stdin.on('data', function (data) {
     input += data;
 });
 
-process.stdin.on('end', function () {
+process.stdin.on('end', main);
+function main() {
     processData(input.split('\n')[1].split(' ').map(Number));
-});
+}
+
+if (process.argv[2] === 'test') {
+    process.stdin.pause();
+    input = `
+    5
+    2 3 4 5 6
+    `.replace(/^\s+/mg, "").trim();
+    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    main();
+}
