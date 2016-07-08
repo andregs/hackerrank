@@ -2,17 +2,19 @@
 
 // https://www.hackerrank.com/contests/projecteuler/challenges/euler014
 
+// FIXME: this code gives "wrong answer" for test case #4 and above
+
 const start = new Date();
-const max = 5 * Math.pow(10,6);
+const max = 5 * Math.pow(10, 6);
 let collatz = {1: 1};
 for (let i = 2; i <= max; i++)
     collatz[i] = null;
 
 function main() {
     for (let i = 2; i <= max; i++) {
-        let stack = [], j = 0;
+        let chain = [], j = 0;
         for (var steps = 1, n = i; n > 1; steps++) {
-            stack[j++] = n;
+            chain[j++] = n;
             if (collatz[n] !== null) {
                 steps += collatz[n] - 1;
                 break;
@@ -21,9 +23,9 @@ function main() {
                 else n = 3 * n + 1;
             }
         }
-        for (j = 0; j < stack.length; j++) {
-            if (stack[j] <= max && collatz[stack[j]] === null) {
-                collatz[stack[j]] = steps - j;
+        for (j = 0; j < chain.length; j++) {
+            if (chain[j] <= max && collatz[chain[j]] === null) {
+                collatz[chain[j]] = steps - j;
             }
         }
     }
@@ -58,7 +60,7 @@ if (process.argv[2] === 'test') {
     15
     20
     1
-    ${5 * Math.pow(10, 6)}
+    ${max}
     `.replace(/^\s+/mg, "").trim();
     process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
     main();
