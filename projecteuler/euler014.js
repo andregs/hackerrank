@@ -1,45 +1,60 @@
 'use strict';
 
 // https://www.hackerrank.com/contests/projecteuler/challenges/euler014
-
-// FIXME: this code gives "wrong answer" for test case #4 and above
+// tip: this is all about improving performance without sacrificing memory
 
 const start = new Date();
-const max = 5 * Math.pow(10, 6);
-let collatz = {1: 1};
-for (let i = 2; i <= max; i++)
-    collatz[i] = null;
+
+// I don't know why, but some test cases failed when max = 5e6
+const max = 7e6;
 
 function main() {
-    for (let i = 2; i <= max; i++) {
-        let chain = [], j = 0;
-        for (var steps = 1, n = i; n > 1; steps++) {
-            chain[j++] = n;
-            if (collatz[n] !== null) {
-                steps += collatz[n] - 1;
-                break;
-            } else {
-                if (n % 2 === 0) n /= 2;
-                else n = 3 * n + 1;
-            }
-        }
-        for (j = 0; j < chain.length; j++) {
-            if (chain[j] <= max && collatz[chain[j]] === null) {
-                collatz[chain[j]] = steps - j;
-            }
-        }
-    }
+    computeLongestSteps();
     input.split('\n').slice(1).map(Number).forEach(processLine);
 }
 
-function processLine(lineN) {
-    for (var maxN, maxStep = -Infinity; lineN > 0; lineN--) {
-        if (collatz[lineN] > maxStep) {
-            maxStep = collatz[lineN];
-            maxN = lineN;
+const longestStep = [0, 1];
+let maxElement = 1, length = 2;
+
+function computeLongestSteps() {
+    for (let i = 2; i <= max; i++) {
+        let s = steps(i);
+        if (s >= maxElement) {
+            maxElement = s;
+            longestStep[length++] = i;
         }
     }
-    process.stdout.write(maxN + '\n');
+}
+
+function processLine(n) {
+    for (var i = 0; longestStep[i] <= n; i++);
+    process.stdout.write(longestStep[i - 1] + '\n');
+}
+
+const stepsCache = [0, 1];
+
+function steps(n) {
+    if (n === 1) return 1;
+    let chain = [], length = 0;
+    for (var i = 0, j = n; j > 1; i++) {
+        chain[length++] = j;
+        if (stepsCache[j]) {
+            i += stepsCache[j];
+            break;
+        } else {
+            j = next(j);
+        }
+    }
+    for (j = 0; j < length; j++) {
+        if (chain[j] <= max && ! stepsCache[chain[j]]) {
+            stepsCache[chain[j]] = i - j;
+        }
+    }
+    return stepsCache[n];
+}
+
+function next(n) {
+    return (n % 2 === 0) ? (n / 2) : (3 * n + 1);
 }
 
 process.stdin.resume();
@@ -55,15 +70,18 @@ process.stdin.on('end', main);
 if (process.argv[2] === 'test') {
     process.stdin.pause();
     input = `
-    5
+    8
+    0
     10 
     15
     20
+    3
+    4
     1
     ${max}
     `.replace(/^\s+/mg, "").trim();
-    process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
+    process.stderr.write(`Input:\n${input}\n\nOutput:\n`);
     main();
     const end = new Date();
-    process.stdout.write((end - start) / 1000 + ' seconds\n');
+    process.stderr.write((end - start) / 1000 + ' seconds\n');
 }
