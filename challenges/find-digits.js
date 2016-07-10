@@ -3,9 +3,10 @@
 // https://www.hackerrank.com/challenges/find-digits
 
 function main() {
-    input.split('\n').slice(1).map(n => n.split('')).forEach(
-        function (digits) {
-            const count = digits.filter(d => digits.length % d === 0).length;
+    input.split('\n').slice(1).map(Number).forEach(
+        function (n) {
+            const count = n.toString().split('')
+                .filter(digit => n % digit === 0).length;
             process.stdout.write(`${count}\n`);
         }
     );
@@ -25,9 +26,18 @@ process.stdin.on("end", function () {
 if (process.argv[2] === 'test') {
     process.stdin.pause();
     input = `
-    2
-    12
-    1012
+    11
+    123456789
+    114108089
+    110110015
+    121
+    33
+    44
+    55
+    66
+    77
+    88
+    106108048
     `.replace(/^\s+/mg, "").trim();
     process.stdout.write(`Input:\n${input}\n\nOutput:\n`);
     main();
