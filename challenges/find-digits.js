@@ -1,6 +1,7 @@
 'use strict';
 
 // https://www.hackerrank.com/challenges/find-digits
+// tip: it's easier when you convert the number N into an array of digits
 
 function main() {
     input.split('\n').slice(1).map(Number).forEach(
