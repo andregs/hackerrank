@@ -12,7 +12,7 @@ function main() {
 
 function processLine(n) {
     process.stdout.write(
-        new BigNumber(2).pow(n, 0)
+        new BigNumber(2).pow(n)
             .toFixed().split('').map(Number)
             .reduce((a, b) => a + b) + '\n'
     );
