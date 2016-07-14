@@ -6,15 +6,15 @@ function main() {
     input = input.split('\n').slice(1)[0].split(' ').map(Number);
     let totalSwaps = 0;
     for (let i = 0; i < input.length; i++) {
-        let swaps = 0;
+        let sorted = true;
         for (let j = 0; j < input.length - 1; j++) {
             if (input[j] > input[j + 1]) {
                 [input[j], input[j + 1]] = [input[j + 1], input[j]];
-                swaps++;
+                sorted = false;
                 totalSwaps++;
             }
         }
-        if (swaps === 0) break;
+        if (sorted) break;
     }
 
     process.stdout.write(`Array is sorted in ${totalSwaps} swaps.\n`);
