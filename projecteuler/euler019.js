@@ -1,9 +1,6 @@
 'use strict';
 
 // https://www.hackerrank.com/contests/projecteuler/challenges/euler019
-
-// FIXME: this code does NOT pass on test cases #4 and above. Any suggestion is appreciated.
-
 // tip: starting date & ending date can be out of order.
 // tip: you can't use javascript's Date object because the input contains huge years.
 // tip: use the zeller's congruence to calculate the day of the week.
@@ -11,9 +8,9 @@
 const BigNumber = require('bignumber.js');
 
 function main() {
-    process.stderr.write('main\n');
-    input = input.split('\n').slice(1).map(line => {
-        line = line.split(' ');
+    let output = '';
+    input = input.trim().split('\n').slice(1).map(line => {
+        line = line.trim().split(' ');
         line[0] = new BigNumber(line[0]);
         line[1] = + line[1];
         line[2] = + line[2];
@@ -27,27 +24,28 @@ function main() {
         if (toYMD(...begin).gt(toYMD(...end)))
             [begin, end] = [end, begin];
 
-        let answer = 172 * centuries(begin, end);
+        let answer = centuries(begin, end).mul(172);
 
         // chooses the strategy that is probably the fastest
-        if (answer > 172) {
+        if (answer.gt(172)) {
             if (toYMD(...centuryBegin(begin)).lt(toYMD(...begin)))
-                answer -= sundays(centuryBegin(begin), begin);
+                answer = answer.sub(sundays(centuryBegin(begin), begin));
 
             if (toYMD(...centuryEnd(end)).gt(toYMD(...end)))
-                answer -= sundays(end, centuryEnd(end));
+                answer = answer.sub(sundays(end, centuryEnd(end)));
 
             if (begin[2] === 1 && dayOfWeek(...begin) === 0)
-                answer++;
+                answer = answer.add(1);
 
             if (end[2] === 1 && dayOfWeek(...end) === 0)
-                answer++;
+                answer = answer.add(1);
         } else {
             answer = sundays(begin, end);
         }
 
-        process.stdout.write(`${answer}\n`);
+        output += `${answer}\n`;
     }
+    process.stdout.write(output);
 }
 
 function toYMD(year, month, day) {
@@ -59,7 +57,7 @@ function toYMD(year, month, day) {
 function centuries(date1, date2) {
     date1 = centuryBegin(date1);
     date2 = centuryBegin(date2);
-    return date2[0].sub(date1[0]).add(100).div(100).toNumber();
+    return date2[0].sub(date1[0]).add(100).div(100);
 }
 
 function centuryBegin(date) {
@@ -74,14 +72,9 @@ function centuryEnd(date) {
 function sundays(begin, end) {
     let beginYMD = toYMD(...begin), endYMD = toYMD(...end);
 
-    // process.stderr.write(`begin ${begin} ${dayOfWeek(...begin)} `);
-    // process.stderr.write(`end ${end} ${dayOfWeek(...end)}\n`);
-
     let sundays = 0;
     let [year, month] = begin;
     let copyYMD = toYMD(year, month, 1);
-
-    // process.stderr.write(`${copyYMD}\n${endYMD}\n`);
 
     while (copyYMD.lte(endYMD)) {
         if (dayOfWeek(year, month, 1) === 0)
@@ -124,7 +117,7 @@ process.stdin.on('end', main);
 if (process.argv[2] === 'test') {
     process.stdin.pause();
     input = `
-    8
+    whatever
     1910 1 1
     1900 1 1
     2000 1 1
@@ -141,6 +134,12 @@ if (process.argv[2] === 'test') {
     2015 3 1
     10000000000000000 2 31
     9999999999999000 2 1
+    1900 1 1
+    10000000000000000 12 31
+    1900 11 31
+    1900 2 31
+    1 1 1
+    1900 2 32
     `.replace(/^\s+/mg, "").trim();
     process.stderr.write(`Input:\n${input}\n\nOutput:\n`);
     main();
