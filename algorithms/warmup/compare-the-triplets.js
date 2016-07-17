@@ -1,6 +1,6 @@
 'use strict';
 
-// https://www.hackerrank.com/contests/projecteuler/challenges/compare-the-triplets
+// https://www.hackerrank.com/challenges/compare-the-triplets
 
 function main() {
     const [a, b] = input.trim().split('\n')

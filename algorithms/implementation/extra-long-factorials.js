@@ -1,6 +1,6 @@
 'use strict';
 
-// https://www.hackerrank.com/contests/projecteuler/challenges/extra-long-factorials
+// https://www.hackerrank.com/challenges/extra-long-factorials
 
 const BigNumber = require('bignumber.js');
 
