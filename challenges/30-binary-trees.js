@@ -27,16 +27,14 @@ function BinarySearchTree() {
     this.levelOrder = function (root) {
         // BEGIN SOLUTION /////////////////////////////////////////////////////
 
-        let output = '', nodeCount;
-        const visiting = [root];
+        let output = '';
 
-        while (nodeCount = visiting.length) {
-            while (nodeCount-- > 0) {
-                const node = visiting.shift();
-                output += node.data + ' ';
-                if (node.left) visiting.push(node.left);
-                if (node.right) visiting.push(node.right);
-            }
+        const visiting = [root];
+        while (visiting.length) {
+            const node = visiting.shift();
+            output += node.data + ' ';
+            if (node.left) visiting.push(node.left);
+            if (node.right) visiting.push(node.right);
         }
 
         process.stdout.write(output.trim());
